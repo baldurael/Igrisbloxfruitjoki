@@ -1,0 +1,474 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Igris store | Instan Order</title>
+  <meta name="description" content="Jasa joki Blox Fruit cepat & aman. Leveling, raid,v4, dan layanan lainnya."/>
+  <style>
+    :root{
+      --bg:#0b0b0b;        /* hitam pekat */
+      --bg2:#121212;       /* panel */
+      --card:#161616;      /* kartu */
+      --muted:#aaaaaa;     /* teks sekunder */
+      --txt:#f7f7f7;       /* teks utama */
+      --brand:#ff7a00;     /* orange */
+      --brand-2:#ffa44d;   /* orange terang */
+      --ok:#38d39f;        /* hijau */
+      --warn:#ffd366;      /* kuning */
+      --err:#ff5c5c;       /* merah */
+      --radius:18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --inset: inset 0 1px 0 rgba(255,255,255,.03), inset 0 -1px 0 rgba(0,0,0,.5);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(255,122,0,.12), transparent 60%),
+                  radial-gradient(1000px 500px at 110% 10%, rgba(255,122,0,.08), transparent 60%),
+                  var(--bg);
+      color:var(--txt);
+      line-height:1.6;
+    }
+    a{color:var(--brand)}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(11,11,11,.7);backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--txt)}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#ff4d00);box-shadow:0 8px 20px rgba(255,122,0,.35)}
+    .brand b{font-size:1.05rem;letter-spacing:.2px}
+    .nav a.btn{padding:10px 14px;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.08)}
+    .btn-primary{background:linear-gradient(180deg,var(--brand-2),var(--brand));color:#111;font-weight:700;box-shadow:0 8px 24px rgba(255,122,0,.35)}
+    .btn-ghost{color:var(--txt)}/* Hero */
+.hero{padding:64px 0 36px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+.badge{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:999px;background:linear-gradient(180deg,#1b1b1b,#111);border:1px solid rgba(255,255,255,.06);box-shadow:var(--inset)}
+.badge i{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--brand),#ff4d00)}
+h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin:14px 0}
+.lead{color:#d7d7d7;max-width:60ch}
+.hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.stat{background:linear-gradient(180deg,#171717,#111);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px;box-shadow:var(--shadow),var(--inset)}
+.stat b{font-size:1.3rem}
+
+/* Section */
+section{padding:36px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:14px}
+.section-head h2{margin:0;font-size:1.6rem}
+.subtitle{color:var(--muted);font-size:.95rem}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:linear-gradient(180deg,#171717,#101010);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow),var(--inset)}
+.card h3{margin:6px 0 6px}
+.price{font-weight:800;font-size:1.4rem;letter-spacing:.3px}
+.chip{display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(255,122,0,.12);border:1px dashed rgba(255,122,0,.45);color:var(--brand);font-size:.8rem}
+ul.feats{padding-left:18px;margin:10px 0 16px}
+ul.feats li{margin:6px 0}
+
+/* Grid responsive */
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.cards{grid-template-columns:1fr}}
+
+/* Order */
+.order{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+@media (max-width:960px){.order{grid-template-columns:1fr}}
+.panel{background:linear-gradient(180deg,#171717,#0f0f0f);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow),var(--inset)}
+label{display:block;font-weight:600;margin:10px 0 6px}
+.field, select, textarea{width:100%;background:#0f0f0f;border:1px solid rgba(255,255,255,.08);border-radius:12px;color:var(--txt);padding:12px 12px;outline:none}
+textarea{min-height:100px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.row{grid-template-columns:1fr}}
+.total{display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:14px;background:linear-gradient(180deg,#151515,#0f0f0f);border:1px solid rgba(255,255,255,.06)}
+
+/* FAQ */
+details{border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;background:linear-gradient(180deg,#161616,#0f0f0f)}
+details+details{margin-top:10px}
+summary{cursor:pointer;font-weight:700}
+
+/* Footer */
+footer{padding:40px 0 80px;color:var(--muted)}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+@media (max-width:960px){.foot{grid-template-columns:1fr}}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px}
+
+/* Micro-interactions */
+.btn{cursor:pointer;border:none}
+.btn:active{transform:translateY(1px)}
+.card:hover, .panel:hover{transform: translateY(-2px); transition: .2s ease;}
+
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="brand" aria-label="Beranda Igris store blox fruit">
+        <div class="logo" aria-hidden="true"></div>
+        <b>Igris Store</b>
+      </a>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a class="btn btn-ghost" href="#paket">Paket</a>
+        <a class="btn btn-ghost" href="#order">Order</a>
+        <a class="btn btn-primary" href="#order">Pesan Sekarang</a>
+      </div>
+    </div>
+  </nav>  <!-- HERO -->  <header id="home" class="hero container">
+    <div class="hero-grid">
+      <div>
+        <span class="badge"><i></i><span>Aman • Cepat • Berpengalaman</span></span>
+        <h1>Jasa Joki <span style="color:var(--brand)">Blox Fruit</span><br/>Leveling, Raid, & v4</h1>
+        <p class="lead">Terima joki semua kebutuhan kamu: level, mastery, raid, ,v4. Garansi proses rapi & bukti progress.
+        </p>
+        <div style="display:flex;gap:10px;margin-top:12px">
+          <a class="btn btn-primary" href="#order">Mulai Order</a>
+          <a class="btn btn-ghost" href="#faq">Lihat FAQ</a>
+        </div>
+        <div class="hero-cards">
+          <div class="stat"><div class="subtitle">Order selesai</div><b>3+</b></div>
+          <div class="stat"><div class="subtitle">Rata-rata waktu</div><b>&lt; 24 Jam</b></div>
+          <div class="stat"><div class="subtitle">Rating</div><b>3.5/5</b></div>
+          <div class="stat"><div class="subtitle">Dukungan</div><b>WA & Discord</b></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel" aria-label="Kartu highlight">
+          <div class="subtitle">Highlight Layanan</div>
+          <div class="cards" style="grid-template-columns:1fr;gap:10px;margin-top:10px">
+            <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="chip">Leveling Cepat</div>
+                <h3> Max Level</h3>
+                <div class="subtitle"> aman anti banned</div>
+              </div>
+              <div aria-hidden="true" style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--brand),#ff4d00);"></div>
+            </div>
+            <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="chip">Raid & v4</div>
+                <h3>Raid All Fruits</h3>
+                <div class="subtitle">Fast</div>
+              </div>
+              <div aria-hidden="true" style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#ffb067,#ff7a00);"></div>
+            </div>
+            <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="chip">event & Quest</div>
+                <h3>Material</h3>
+                <div class="subtitle">Drop proof via screenshot</div>
+              </div>
+              <div aria-hidden="true" style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#ffd366,#ffa44d);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>  <!-- PAKET -->  <section id="paket" class="container">
+    <div class="section-head">
+      <div>
+        <h2>Paket & Harga</h2>
+        <div class="subtitle">Pilih paket populer di bawah atau custom di formulir order.</div>
+      </div>
+      <a class="btn btn-primary" href="#order">Order Sekarang</a>
+    </div>
+    <div class="cards">
+      <article class="card" data-package="Sea 1">
+        <div class="chip">Sea 1</div>
+        <h3>Sea 1</h3>
+        <p class="subtitle">Lv0 > Lv700</p>
+        <div class="price">Rp 25.000</div>
+        <ul class="feats">
+          <li>Sea 2</li>
+          <li>Proof screenshot</li>
+        </ul>
+        <button class="btn btn-primary" onclick="quickSelect('starter')">Pilih Sea 1</button>
+      </article><article class="card" data-package="Sea 2">
+    <div class="chip">Sea</div>
+    <h3>Sea 2</h3>
+    <p class="subtitle">Lv700 > Lv1500</p>
+    <div class="price">Rp 55.000</div>
+    <ul class="feats">
+      <li>3x Raid (chip by kami)</li>
+      <li>Support progress harian</li>
+    </ul>
+    <button class="btn btn-primary" onclick="quickSelect('pro')">Pilih Sea 2</button>
+  </article>
+
+  <article class="card" data-package="Sea 3">
+    <div class="chip">Sea 3</div>
+    <h3>Sea 3</h3>
+    <p class="subtitle">Level max</p>
+    <div class="price">Rp 145.000</div>
+    <ul class="feats">
+      <li>Max Level/Target</li>
+      <li>Prioritas antrian</li>
+    </ul>
+    <button class="btn btn-primary" onclick="quickSelect('sultan')">Pilih sea 3</button>
+  </article>
+</div>
+
+  </section>  <!-- ORDER FORM -->  <section id="order" class="container">
+    <div class="section-head">
+      <div>
+        <h2>Form Order Instan</h2>
+        <div class="subtitle">Isi data di bawah. Total akan terhitung otomatis. Kirim via WhatsApp/Discord.</div>
+      </div>
+    </div><div class="order">
+  <form id="orderForm" class="panel" onsubmit="sendOrder(event)">
+    <div class="row">
+      <div>
+        <label for="nama">Nama</label>
+        <input class="field" id="nama" required placeholder="Nama kamu"/>
+      </div>
+      <div>
+        <label for="kontak">Kontak (WA/Discord)</label>
+        <input class="field" id="kontak" required placeholder="08xxx / user#0001"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="paket">Paket</label>
+        <select id="paket" onchange="calc()">
+          <option value="Sea 1">Sea 1 — Rp25.000</option>
+          <option value="Sea 2">Sea 2 — Rp55.000</option>
+          <option value="Sea 3">Sea 3 — Rp145.000</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <div>
+        <label for="hargaCustom">Harga Custom (Rp)</label>
+        <input class="field" id="hargaCustom" type="number" min="0" placeholder="Isi jika pilih Custom" oninput="calc()" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="qty">Jumlah (x)</label>
+        <input class="field" id="qty" type="number" min="1" value="1" oninput="calc()" />
+      </div>
+      <div>
+        <label for="server">Server</label>
+        <select id="server">
+          <option>SEA</option>
+          <option>NA</option>
+          <option>EU</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="login">Metode Login</label>
+        <select id="login">
+          <option>Email & Password</option>
+          <option>Username & Password</option>
+          <option>Join via Alt (tanpa login)</option>
+        </select>
+      </div>
+      <div>
+        <label for="pembayaran">Pembayaran</label>
+        <select id="pembayaran" onchange="calc()">
+          <option>QRIS</option>
+          <option>DANA</option>
+          <option>GoPay</option>
+          <option>OVO</option>
+          <option>Transfer Bank</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="catatan">Catatan</label>
+    <textarea id="catatan" placeholder="Contoh: target level/mastery, jam eksekusi, dll."></textarea>
+
+    <div class="row">
+      <div>
+        <label for="voucher">Kode Voucher (opsional)</label>
+        <input class="field" id="voucher" placeholder="Contoh: ORANGE10" oninput="calc()" />
+      </div>
+      <div>
+
+        </select>
+      </div>
+    </div>
+
+    <div class="total">
+      <div>
+        <div class="subtitle">Subtotal</div>
+        <b id="subtotal">Rp 0</b>
+      </div>
+      <div>
+        <div class="subtitle">Diskon</div>
+        <b id="diskon">- Rp 0</b>
+      </div>
+      <div>
+        <div class="subtitle">Grand Total</div>
+        <b id="grand" style="color:var(--brand)">Rp 0</b>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+      <button class="btn btn-primary" type="submit">Kirim via WhatsApp</button>
+      <button class="btn btn-ghost" type="button" onclick="copyOrder()">Salin Ringkasan</button>
+    </div>
+  </form>
+
+  
+    </ul>
+    <div class="subtitle" style="margin-top:10px">Voucher</div>
+    <ul class="feats">
+      <li><b>ORANGE10</b> → diskon 10% (maks Rp 10.000)</li>
+    </ul>
+    <hr style="border:none;border-top:1px solid rgba(255,255,255,.08);margin:14px 0"/>
+    <div class="subtitle">Keamanan</div>
+    <ul class="feats">
+      <li>2FA/OTP hanya diminta saat login (hapus setelah selesai)</li>
+      <li>Progress & bukti dikirim berkala</li>
+      <li>Garansi waktu sesuai estimasi</li>
+    </ul>
+  </aside>
+</div>
+
+  </section>  <!-- FAQ -->  <section id="faq" class="container">
+    <div class="section-head"><h2>FAQ</h2></div>
+    <details>
+      <summary>Berapa lama proses joki?</summary>
+      <p>Tergantung paket & antrian, umumnya 2–24 jam per paket. Untuk target besar/awakening lengkap bisa multi hari dengan progress harian.</p>
+    </details>
+    <details>
+      <summary>Apa aman dari banned?</summary>
+      <p>Kami bermain manual, tidak menggunakan script cheat/auto farm ilegal pada akun klien. Resiko selalu ada di game online, namun kami minimalkan dengan metode aman.</p>
+    </details>
+    <details>
+      <summary>Bagaimana jika akun butuh OTP?</summary>
+      <p>Kami akan hubungi kamu via WA/Discord untuk konfirmasi OTP satu kali. Setelah login, kami sarankan ganti sandi setelah joki selesai.</p>
+    </details>
+  </section>  <!-- FOOTER -->  <footer class="container">
+    <div class="foot">
+      <div>
+        <div class="pill">
+          <div aria-hidden="true" style="width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--brand),#ff4d00)"></div>
+          <b>Joki Blox Fruit</b>
+        </div>
+        <p style="margin-top:10px">© 2025 Igris Joki. All rights reserved. <span id="y"></span></p>
+      </div>
+      <div>
+        <div class="subtitle">Navigasi</div>
+        <ul class="feats" style="margin-top:8px">
+          <li><a href="#paket">Paket</a></li>
+          <li><a href="#order">Order</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="subtitle">Kontak</div>
+        <ul class="feats" style="margin-top:8px">
+          <li>WhatsApp: <a href="#" id="waLink">klik untuk chat</a></li>
+          <li>Discord: yourdiscord#0001</li>
+        </ul>
+      </div>
+    </div>
+  </footer>  <script>
+    const PRICES = { starter: 25000, Sea 1: 55000, Sea 2: 145000 };
+    const VOUCHERS = {
+      'ORANGE10': { type:'percent', value:10, cap:10000 },
+    };
+
+    const formatIDR = (n)=> new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n||0);
+
+    function quickSelect(key){
+      document.getElementById('paket').value = key;
+      calc();
+      document.getElementById('order').scrollIntoView({behavior:'smooth'});
+    }
+
+    function adminFee(subtotal, useRekber){
+      if(!useRekber) return 0;
+      if(subtotal < 50000) return 2000;
+      if(subtotal <= 150000) return 4000;
+      const threePct = Math.round(subtotal * 0.03);
+      return Math.max(5000, threePct);
+    }
+
+    function calc(){
+      const paket = document.getElementById('paket').value;
+      const qty = Math.max(1, parseInt(document.getElementById('qty').value||'1'));
+      const isCustom = paket === 'custom';
+      const base = isCustom ? Math.max(0, parseInt(document.getElementById('hargaCustom').value||'0')) : PRICES[paket];
+      let subtotal = base * qty;
+
+      // Voucher
+      const code = (document.getElementById('voucher').value||'').trim().toUpperCase();
+      let disc = 0;
+      if(code && VOUCHERS[code]){
+        const v = VOUCHERS[code];
+        if(v.type==='percent'){
+          disc = Math.round(subtotal * (v.value/100));
+          if(v.cap) disc = Math.min(disc, v.cap);
+        }
+      }
+
+      const useRekber = document.getElementById('rekber').value === '1';
+      const admin = adminFee(subtotal - disc, useRekber);
+      const grand = Math.max(0, subtotal - disc + admin);
+
+      // render
+      document.getElementById('subtotal').textContent = formatIDR(subtotal);
+      document.getElementById('admin').textContent = formatIDR(admin);
+      document.getElementById('diskon').textContent = `- ${formatIDR(disc)}`;
+      document.getElementById('grand').textContent = formatIDR(grand);
+
+      return {subtotal, disc, admin, grand, base, qty, paket};
+    }
+
+    function summaryText(){
+      const {subtotal, disc, admin, grand, base, qty, paket} = calc();
+      const nama = document.getElementById('nama').value;
+      const kontak = document.getElementById('kontak').value;
+      const server = document.getElementById('server').value;
+      const login = document.getElementById('login').value;
+      const catatan = document.getElementById('catatan').value;
+      const pembayaran = document.getElementById('pembayaran').value;
+      const voucher = (document.getElementById('voucher').value||'').toUpperCase();
+
+      const paketName = paket==='custom' ? `Custom (Rp ${base.toLocaleString('id-ID')})` : paket[0].toUpperCase()+paket.slice(1);
+
+      return (
+`ORDER JOKI BLOX FRUIT\n`+
+`Nama      : ${nama}\n`+
+`Kontak    : ${kontak}\n`+
+`Paket     : ${paketName} x${qty}\n`+
+`Server    : ${server}\n`+
+`Login     : ${login}\n`+
+`Pembayaran: ${pembayaran}\n`+
+(voucher?`Voucher   : ${voucher}\n`:``)+
+`Catatan   : ${catatan||'-'}\n`+
+`-----------------------------\n`+
+`Subtotal  : ${formatIDR(subtotal)}\n`+
+`Diskon    : - ${formatIDR(disc)}\n`+
+`TOTAL     : ${formatIDR(grand)}\n`+
+`\n#Mohon balas untuk konfirmasi data`);
+    }
+
+    function sendOrder(e){
+      e.preventDefault();
+      const text = encodeURIComponent(summaryText());
+      const waNumber = '6281243881661'; // GANTI DENGAN NOMOR WA ANDA (format internasional tanpa +)
+      const url = `https://wa.me/${waNumber}?text=${text}`;
+      window.open(url, '_blank');
+    }
+
+    function copyOrder(){
+      const text = summaryText();
+      navigator.clipboard.writeText(text).then(()=>{
+        alert('Ringkasan order disalin. Tempel di chat WA/Discord kamu.');
+      });
+    }
+
+    // init
+    calc();
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // contoh link WA default (tanpa nomor) — silakan ganti di sendOrder()
+    document.getElementById('waLink').href = 'https://wa.me/';
+  </script></body>
+  </html>
